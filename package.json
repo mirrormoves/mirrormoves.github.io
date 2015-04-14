@@ -1,0 +1,24 @@
+{
+  "name": "MirrorMoves",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-autoprefixer": "^2.1.0",
+    "gulp-concat": "^2.5.2",
+    "gulp-minify-css": "^1.0.0",
+    "gulp-sass": "^1.3.3",
+    "gulp-util": "^3.0.4"
+  }
+}
+
+// Rebuild job runs both of the above jobs
+gulp.task("rebuild", ["scripts", "teller-styles", "teller-scripts", "styles", "styleguide"]);
+gulp.task("default", ["rebuild"]);
+
+// Watch job rebuilds and then watches for changes
+gulp.task("watch", ["rebuild"], function () {
+    gulp.watch(jsfiles, ["scripts"]);
+    gulp.watch(tellerjsfiles, ["teller-scripts"]);
+    gulp.watch(["lib/stylesheets/**/*.scss"], ["teller-styles", "styles", "styleguide"]);
+});
